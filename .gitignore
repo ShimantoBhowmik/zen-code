@@ -1,0 +1,88 @@
+# Environment and secrets
+.env
+.env.local
+.env.production
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+.tox/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+logs/
+tmp/
+*.backup
+.cache/
+
+# Sandbox and working directories
+/sandbox/repos/
+/tmp/
+/backspace-sandbox/
+
+# Node.js (if any)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+*.orig
+*.rej
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Local configuration
+config.local.py
+settings.local.py
+
+# Frozen requirements
+requirements-frozen.txt
+
+# Test outputs
+test-output/
+coverage.xml
+*.cover
