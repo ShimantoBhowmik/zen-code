@@ -171,11 +171,11 @@ def main(repo_url: str, prompt: str, model: str, branch: str, dry_run: bool):
     ))
 
 async def process_repository(repo_url: str, owner: str, repo_name: str, 
-                           prompt: str, model: str, branch: str, dry_run: bool):
-    """Main processing pipeline with enhanced progress tracking"""
+                           prompt: str, model: str, branch: str, dry_run: bool, validate_code: bool = True):
+    """Main processing pipeline with enhanced progress tracking and validation"""
     
     # Import progress system
-    from progress_display import EnhancedProgressCallback, create_celebration_display, create_error_display
+    from progress_display import EnhancedProgressCallback, create_celebration_display, create_error_display, create_failure_display
     
     progress_callback = EnhancedProgressCallback()
     
@@ -235,12 +235,20 @@ async def process_repository(repo_url: str, owner: str, repo_name: str,
             await progress_callback.on_error("generate", str(e))
             raise e
         
-        # Step 4: Apply changes
+        # Step 4: Apply changes with validation
         await progress_callback.on_apply_start(len(changes))
         try:
-            await sandbox.apply_changes(repo_path, changes)
+            validation_success, validation_feedback = await sandbox.apply_changes(repo_path, changes, prompt, validate_code=validate_code)
             applied_changes = [f"{change['action'].title()}: {change['file_path']}" for change in changes]
             await progress_callback.on_apply_complete(applied_changes)
+            
+            # If validation failed, stop here and show failure
+            if not validation_success:
+                await progress_callback.stop_progress()
+                await sandbox.cleanup()
+                create_failure_display(validation_feedback)
+                return
+                
         except Exception as e:
             await progress_callback.on_error("apply", str(e))
             raise e

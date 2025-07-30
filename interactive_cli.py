@@ -469,10 +469,14 @@ def get_execution_options(prompt_data: Dict[str, Any]) -> Dict[str, Any]:
     
     selected_model = available_models[int(model_choice) - 1]
     
+    # Validation is always enabled by default
+    console.print("[dim]✅ Code validation with feedback loop enabled (max 3 iterations)[/dim]")
+    
     return {
         "dry_run": dry_run,
         "branch": branch_name,
-        "model": selected_model
+        "model": selected_model,
+        "validate_code": True  # Always enabled
     }
 
 def display_execution_summary(repo_url: str, prompt_data: Dict[str, Any], options: Dict[str, Any]):
@@ -484,6 +488,7 @@ def display_execution_summary(repo_url: str, prompt_data: Dict[str, Any], option
     summary.add_row("[cyan]Language:[/cyan]", prompt_data["language"])
     summary.add_row("[cyan]AI Model:[/cyan]", options["model"])
     summary.add_row("[cyan]Branch:[/cyan]", options["branch"])
+    summary.add_row("[cyan]Validation:[/cyan]", "Enabled (max 3 iterations)")
     summary.add_row("[cyan]Mode:[/cyan]", "Preview (Dry Run)" if options["dry_run"] else "Execute & Create PR")
     
     panel = Panel(summary, border_style="bright_yellow", title="Execution Plan")
@@ -553,7 +558,8 @@ def run_interactive_cli():
                 prompt=prompt_data["enhanced_prompt"],
                 model=options["model"],
                 branch=options["branch"],
-                dry_run=options["dry_run"]
+                dry_run=options["dry_run"],
+                validate_code=options.get("validate_code", True)
             ))
         
     except KeyboardInterrupt:

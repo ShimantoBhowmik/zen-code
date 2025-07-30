@@ -261,6 +261,30 @@ def create_celebration_display(pr_url: str):
     
     console.print(success_panel)
 
+def create_failure_display(validation_feedback: str):
+    """Create a validation failure display"""
+    failure_panel = Panel(
+        f"[bold red]🚫 CODE VALIDATION FAILED[/bold red]\n\n"
+        f"[yellow]Validation Error:[/yellow]\n"
+        f"{validation_feedback}\n\n"
+        f"[red]❌ Pull Request NOT Created[/red]\n"
+        f"The generated code failed validation and cannot be deployed safely.\n\n"
+        f"[cyan]💡 What went wrong?[/cyan]\n"
+        f"• The AI-generated code has syntax or runtime errors\n"
+        f"• Code doesn't produce expected output\n"
+        f"• Missing dependencies or file references\n\n"
+        f"[cyan]🔧 Suggested Actions:[/cyan]\n"
+        f"1. Try rephrasing your request more specifically\n"
+        f"2. Include more context about expected behavior\n"
+        f"3. Check if all required files exist in the repository\n"
+        f"4. Try with a different AI model\n\n"
+        f"[dim]SHIMU CODE ensures code quality by validating before deployment.[/dim]",
+        title="🚫 VALIDATION FAILURE",
+        border_style="bright_red"
+    )
+    
+    console.print(Align.center(failure_panel))
+
 def create_error_display(error_message: str):
     """Create an error display"""
     error_panel = Panel(
@@ -280,4 +304,4 @@ def create_error_display(error_message: str):
     console.print(Align.center(error_panel))
 
 # Export the main progress callback class
-__all__ = ['EnhancedProgressCallback', 'create_celebration_display', 'create_error_display']
+__all__ = ['EnhancedProgressCallback', 'create_celebration_display', 'create_error_display', 'create_failure_display']
