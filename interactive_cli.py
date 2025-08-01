@@ -19,16 +19,16 @@ import click
 console = Console()
 
 def display_ascii_art():
-    """Display the SHIMU CODE ASCII art"""
+    """Display the ZEN CODE ASCII art"""
     ascii_art = """
 ╔═══════════════════════════════════════════════════════════════════╗
 ║                                                                   ║
-║   ███████╗██╗  ██╗██╗███╗   ███╗██╗   ██╗     ██████╗ ██████╗ ██████╗ ███████╗
-║   ██╔════╝██║  ██║██║████╗ ████║██║   ██║    ██╔════╝██╔═══██╗██╔══██╗██╔════╝
-║   ███████╗███████║██║██╔████╔██║██║   ██║    ██║     ██║   ██║██║  ██║█████╗  
-║   ╚════██║██╔══██║██║██║╚██╔╝██║██║   ██║    ██║     ██║   ██║██║  ██║██╔══╝  
-║   ███████║██║  ██║██║██║ ╚═╝ ██║╚██████╔╝    ╚██████╗╚██████╔╝██████╔╝███████╗
-║   ╚══════╝╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
+║   ███████╗███████╗███╗   ██╗     ██████╗ ██████╗ ██████╗ ███████╗
+║   ╚══███╔╝██╔════╝████╗  ██║    ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+║     ███╔╝ █████╗  ██╔██╗ ██║    ██║     ██║   ██║██║  ██║█████╗  
+║    ███╔╝  ██╔══╝  ██║╚██╗██║    ██║     ██║   ██║██║  ██║██╔══╝  
+║   ███████╗███████╗██║ ╚████║    ╚██████╗╚██████╔╝██████╔╝███████╗
+║   ╚══════╝╚══════╝╚═╝  ╚═══╝     ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
 ╚═══════════════════════════════════════════════════════════════════╝
 """
     
@@ -44,7 +44,7 @@ def display_ascii_art():
 def display_welcome_message():
     """Display welcome message and instructions"""
     welcome_panel = Panel.fit(
-        "[bold green]Welcome to SHIMU CODE![/bold green]\n\n"
+        "[bold green]Welcome to ZEN CODE![/bold green]\n\n"
         "[cyan]What I can do for you:[/cyan]\n"
         "   • Analyze any GitHub repository\n"
         "   • Generate code changes from natural language\n"
@@ -376,17 +376,17 @@ def generate_branch_name(prompt: str) -> str:
     if clean_words:
         base_name = '-'.join(clean_words)
     else:
-        base_name = 'shimu-code'
+        base_name = 'zen-code'
     
     # Add timestamp to ensure uniqueness
     timestamp = str(int(time.time()))[-6:]  # Last 6 digits of timestamp
     
     # Create final branch name
-    branch_name = f"shimu/{base_name}-{timestamp}"
+    branch_name = f"zen/{base_name}-{timestamp}"
     
     # Ensure it's not too long (GitHub branch name limit is 250 chars, but keep it reasonable)
     if len(branch_name) > 50:
-        branch_name = f"shimu/{base_name[:30]}-{timestamp}"
+        branch_name = f"zen/{base_name[:30]}-{timestamp}"
     
     return branch_name
 
@@ -515,7 +515,7 @@ def run_interactive_cli():
         display_execution_summary(repo_url, prompt_data, options)
         
         # Import and run the main CLI
-        console.print("\n[bold green]Initializing SHIMU CODE...[/bold green]\n")
+        console.print("\n[bold green]Initializing ZEN CODE...[/bold green]\n")
         
         # Prepare arguments for the main CLI
         cli_args = [
@@ -563,7 +563,7 @@ def run_interactive_cli():
             ))
         
     except KeyboardInterrupt:
-        console.print("\n\n[yellow]Thanks for using SHIMU CODE! See you next time![/yellow]")
+        console.print("\n\n[yellow]Thanks for using ZEN CODE! See you next time![/yellow]")
         sys.exit(0)
     except Exception as e:
         console.print(f"\n[red]❌ An error occurred: {str(e)}[/red]")
@@ -572,7 +572,7 @@ def run_interactive_cli():
 
 @click.command()
 def chat():
-    """Launch SHIMU CODE interactive chat interface"""
+    """Launch ZEN CODE interactive chat interface"""
     run_interactive_cli()
 
 if __name__ == "__main__":

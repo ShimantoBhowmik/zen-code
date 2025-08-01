@@ -257,10 +257,10 @@ async def process_repository(repo_url: str, owner: str, repo_name: str,
         await progress_callback.on_commit_start(branch)
         try:
             if not branch:
-                branch = f"shimu-code-{int(asyncio.get_event_loop().time())}"
+                branch = f"zen-code-{int(asyncio.get_event_loop().time())}"
             
             commit_sha = await github_manager.create_branch_and_commit(
-                repo_path, branch, f"🤖 SHIMU CODE: {prompt}", changes
+                repo_path, branch, f"🤖 ZEN CODE: {prompt}", changes
             )
             await progress_callback.on_commit_complete(branch, commit_sha)
         except Exception as e:
@@ -285,12 +285,12 @@ async def process_repository(repo_url: str, owner: str, repo_name: str,
             pr_url = await github_manager.create_pull_request(
                 branch=branch,
                 title=pr_title,
-                body=f"## AI-Generated Changes by SHIMU CODE\n\n"
+                body=f"## AI-Generated Changes by ZEN CODE\n\n"
                      f"**Original Request:** {prompt}\n\n"
                      f"**AI Model:** {model}\n\n"
                      f"**Changes Made:**\n" + 
                      "\n".join([f"- {change['action'].title()}: `{change['file_path']}`" for change in changes]) +
-                     f"\n\n---\n*Generated automatically by SHIMU CODE✨*"
+                     f"\n\n---\n*Generated automatically by ZEN CODE✨*"
             )
             await progress_callback.on_pr_complete(pr_url)
         except Exception as e:

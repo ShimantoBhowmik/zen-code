@@ -1,5 +1,5 @@
 """
-Enhanced progress visualization for SHIMU CODE
+Enhanced progress visualization for ZEN CODE
 Provides beautiful progress bars, status updates, and real-time feedback
 """
 
@@ -20,7 +20,7 @@ import threading
 
 console = Console()
 
-class ShimuProgressTracker:
+class ZenProgressTracker:
     """Advanced progress tracking with beautiful visualizations"""
     
     def __init__(self):
@@ -48,7 +48,7 @@ class ShimuProgressTracker:
     
     def get_progress_table(self) -> Table:
         """Generate a beautiful progress table"""
-        table = Table(title="SHIMU CODE Progress", show_header=False, box=None)
+        table = Table(title="ZEN CODE Progress", show_header=False, box=None)
         
         for i, step in enumerate(self.steps):
             if step["status"] == "completed":
@@ -100,7 +100,7 @@ class AnimatedProgress:
     """Animated progress display with live updates"""
     
     def __init__(self):
-        self.tracker = ShimuProgressTracker()
+        self.tracker = ZenProgressTracker()
         self.live = None
         self.running = False
     
@@ -254,7 +254,7 @@ def create_celebration_display(pr_url: str):
         f"1. Review the changes in your GitHub repository\n"
         f"2. Test the generated code\n"
         f"3. Merge the pull request if everything looks good\n\n"
-        f"[bold magenta]Thank you for using SHIMU CODE!✨[/bold magenta]",
+        f"[bold magenta]Thank you for using ZEN CODE!✨[/bold magenta]",
         title="SUCCESS",
         border_style="bright_green"
     )
@@ -278,7 +278,7 @@ def create_failure_display(validation_feedback: str):
         f"2. Include more context about expected behavior\n"
         f"3. Check if all required files exist in the repository\n"
         f"4. Try with a different AI model\n\n"
-        f"[dim]SHIMU CODE ensures code quality by validating before deployment.[/dim]",
+        f"[dim]ZEN CODE ensures code quality by validating before deployment.[/dim]",
         title="🚫 VALIDATION FAILURE",
         border_style="bright_red"
     )
